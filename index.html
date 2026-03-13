@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hybrid Power Corp. | Electro-Mechanical Turnkey Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --orange: #E8320A;
+    --orange-light: #FF4A1F;
+    --orange-dark: #B52708;
+    --chrome: #C8C8C8;
+    --chrome-light: #E8E8E8;
+    --chrome-dark: #888;
+    --black: #080808;
+    --dark: #0F0F0F;
+    --dark2: #161616;
+    --dark3: #1E1E1E;
+    --dark4: #272727;
+    --text: #E0E0E0;
+    --text-dim: #888;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--orange);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: normal;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--orange);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+    opacity: 0.6;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--orange); }
+
+  /* ===================== NAV ===================== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 3rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,8,8,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(232,50,10,0.2);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .nav-logo-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .nav-logo-text .brand-name {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--orange);
+    letter-spacing: 0.08em;
+  }
+
+  .nav-logo-text .brand-sub {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.5rem;
+    font-weight: 600;
+    color: var(--chrome);
+    letter-spacing: 0.25em;
+    margin-top: 3px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--chrome);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--orange);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--orange); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--orange);
+    padding: 0.65rem 1.4rem;
+    text-decoration: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--orange-light);
+    transform: translateY(-1px);
+  }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--chrome);
+    transition: 0.3s;
+  }
+
+  /* ===================== HERO ===================== */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 72px;
+  }
+
+  #hero-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.82) 50%, rgba(232,50,10,0.06) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    min-height: calc(100vh - 72px);
+  }
+
+  .hero-left { padding: 4rem 0; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(232,50,10,0.1);
+    border: 1px solid rgba(232,50,10,0.4);
+    padding: 0.4rem 1rem;
+    margin-bottom: 2rem;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .hero-badge span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--orange);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title .orange { color: var(--orange); }
+  .hero-title .chrome {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--chrome-dark);
+  }
+
+  .hero-tagline {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    font-weight: 500;
+    color: var(--chrome);
+    letter-spacing: 0.04em;
+    margin-top: 1.2rem;
+    margin-bottom: 2.5rem;
+    max-width: 540px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-accreditations {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2.8rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s 0.55s forwards;
+  }
+
+  .accred-badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 0.4rem 0.9rem;
+    border: 1.5px solid rgba(200,200,200,0.3);
+    color: var(--chrome-light);
+    background: rgba(200,200,200,0.06);
+    clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--orange);
+    padding: 1rem 2.2rem;
+    text-decoration: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.4s;
+  }
+
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,50,10,0.4); }
+  .btn-primary:hover::before { left: 100%; }
+
+  .btn-secondary {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--chrome-light);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border: 1.5px solid rgba(200,200,200,0.3);
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  /* HERO RIGHT - Logo display */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.5s forwards;
+  }
+
+  .hero-logo-showcase {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-logo-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(232,50,10,0.3);
+    animation: spinRing 12s linear infinite;
+  }
+
+  .hero-logo-ring::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: 50%;
+    transform: translateX(-50%);
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 12px var(--orange);
+  }
+
+  .hero-logo-ring-2 {
+    position: absolute;
+    inset: 30px;
+    border-radius: 50%;
+    border: 1px dashed rgba(232,50,10,0.15);
+    animation: spinRing 20s linear infinite reverse;
+  }
+
+  .hero-logo-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 30px rgba(232,50,10,0.4));
+    animation: logoFloat 4s ease-in-out infinite;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+    display: block;
+  }
+
+  .hero-stat-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s 1.5s forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--orange), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  .scroll-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+  }
+
+  /* ===================== TICKER ===================== */
+  .ticker-strip {
+    background: var(--orange);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    border-top: 1px solid var(--orange-dark);
+    border-bottom: 1px solid var(--orange-dark);
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  .ticker-item {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .ticker-sep {
+    width: 4px; height: 4px;
+    background: var(--black);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  /* ===================== SECTIONS COMMON ===================== */
+  section {
+    padding: 7rem 0;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 30px; height: 1.5px;
+    background: var(--orange);
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title .accent { color: var(--orange); }
+
+  /* ===================== ABOUT ===================== */
+  #about { background: var(--dark); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #aaa;
+    line-height: 1.75;
+    margin-top: 1.5rem;
+  }
+
+  .about-text p strong {
+    color: var(--chrome-light);
+    font-weight: 600;
+  }
+
+  .about-highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin-top: 2.5rem;
+    background: var(--dark3);
+    border: 1px solid var(--dark3);
+  }
+
+  .about-highlight {
+    background: var(--dark2);
+    padding: 1.4rem 1.6rem;
+    transition: background 0.3s;
+  }
+
+  .about-highlight:hover { background: var(--dark3); }
+
+  .ah-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+  }
+
+  .ah-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* SVG SCHEMATIC */
+  .about-visual {
+    position: relative;
+  }
+
+  .schematic-wrapper {
+    background: var(--dark2);
+    border: 1px solid var(--dark3);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .schematic-wrapper::before {
+    content: 'POWER DISTRIBUTION SYSTEM';
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(232,50,10,0.5);
+    letter-spacing: 0.2em;
+    position: absolute;
+    top: 0.8rem; left: 1rem;
+  }
+
+  .schematic-svg {
+    width: 100%;
+  }
+
+  /* ===================== PRODUCTS ===================== */
+  #products { background: var(--black); }
+
+  .products-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+
+  .products-desc {
+    font-size: 1.05rem;
+    color: #888;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--dark3);
+    border: 1px solid var(--dark3);
+  }
+
+  .product-card {
+    background: var(--dark);
+    padding: 2rem 1.8rem;
+    transition: background 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--orange);
+    transition: width 0.4s;
+  }
+
+  .product-card:hover { background: var(--dark2); }
+  .product-card:hover::before { width: 100%; }
+
+  .product-icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 1.2rem;
+    color: var(--orange);
+  }
+
+  .product-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--chrome-light);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+
+  .product-detail {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .product-tag {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--orange);
+    border: 1px solid rgba(232,50,10,0.3);
+    padding: 2px 8px;
+    margin-top: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===================== SERVICES / TURNKEY ===================== */
+  #services { background: var(--dark); }
+
+  .services-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .services-sidebar-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.05;
+    color: #fff;
+    margin-top: 1.5rem;
+  }
+
+  .services-sidebar-text {
+    font-size: 1rem;
+    color: #777;
+    line-height: 1.7;
+    margin-top: 1.2rem;
+  }
+
+  .services-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--dark3);
+  }
+
+  .service-step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    border-bottom: 1px solid var(--dark3);
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .service-step:last-child { border-bottom: none; }
+  .service-step:hover { background: rgba(232,50,10,0.04); }
+
+  .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark2);
+    border-right: 1px solid var(--dark3);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: rgba(232,50,10,0.3);
+    transition: color 0.3s;
+  }
+
+  .service-step:hover .step-num { color: var(--orange); }
+
+  .step-content {
+    padding: 1.8rem 2rem;
+  }
+
+  .step-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--chrome-light);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-desc {
+    font-size: 0.95rem;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  /* ===================== INDUSTRIES ===================== */
+  #industries { background: var(--black); }
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+  }
+
+  .industry-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: default;
+    border: 1px solid var(--dark3);
+  }
+
+  .industry-bg {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.6s ease;
+  }
+
+  .industry-card:hover .industry-bg { transform: scale(1.05); }
+
+  .ind-manufacturing { background: linear-gradient(160deg, #1a1a1a 0%, #2a1510 100%); }
+  .ind-industrial    { background: linear-gradient(160deg, #111 0%, #1a1a2a 100%); }
+  .ind-datacenter    { background: linear-gradient(160deg, #0f1a0f 0%, #1a1a1a 100%); }
+  .ind-commercial    { background: linear-gradient(160deg, #1a1510 0%, #1a1a10 100%); }
+
+  .industry-art {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    transition: opacity 0.4s;
+  }
+
+  .industry-card:hover .industry-art { opacity: 0.22; }
+
+  .industry-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, transparent 60%);
+  }
+
+  .industry-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 2rem 1.5rem;
+    transform: translateY(20px);
+    transition: transform 0.4s;
+  }
+
+  .industry-card:hover .industry-content { transform: translateY(0); }
+
+  .industry-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--orange);
+    letter-spacing: 0.25em;
+    margin-bottom: 0.6rem;
+    opacity: 0.8;
+  }
+
+  .industry-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  .industry-desc {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 0.6rem;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s 0.05s, transform 0.4s 0.05s;
+  }
+
+  .industry-card:hover .industry-desc { opacity: 1; transform: translateY(0); }
+
+  /* ===================== ACCREDITATIONS ===================== */
+  #accreditations {
+    background: var(--orange);
+    padding: 5rem 0;
+  }
+
+  .accred-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  .accred-left {
+    flex: 0 0 auto;
+  }
+
+  .accred-header-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: rgba(8,8,8,0.6);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .accred-header-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1.1;
+  }
+
+  .accred-cards {
+    display: flex;
+    gap: 1.5rem;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .accred-card {
+    background: rgba(8,8,8,0.15);
+    border: 1.5px solid rgba(8,8,8,0.25);
+    padding: 2rem 2.5rem;
+    text-align: center;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: background 0.3s, transform 0.2s;
+    min-width: 160px;
+  }
+
+  .accred-card:hover {
+    background: rgba(8,8,8,0.25);
+    transform: translateY(-4px);
+  }
+
+  .accred-acronym {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+  }
+
+  .accred-fullname {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: rgba(8,8,8,0.65);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ===================== CONTACT ===================== */
+  #contact { background: var(--dark); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+
+  .contact-info-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-item-icon {
+    width: 36px; height: 36px;
+    background: rgba(232,50,10,0.1);
+    border: 1px solid rgba(232,50,10,0.25);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-item-icon svg { width: 16px; height: 16px; color: var(--orange); }
+
+  .contact-item-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--orange);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .contact-item-value {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--chrome-light);
+  }
+
+  .contact-logo-area {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--dark3);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .contact-logo-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  /* FORM */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--orange);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: var(--dark2);
+    border: 1px solid var(--dark4);
+    color: var(--chrome-light);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  .form-select { cursor: pointer; }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--orange);
+    background: var(--dark3);
+  }
+
+  .form-input::placeholder, .form-textarea::placeholder {
+    color: var(--text-dim);
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+
+  .form-textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--orange);
+    padding: 1.1rem 2.5rem;
+    border: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-submit:hover {
+    background: var(--orange-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(232,50,10,0.4);
+  }
+
+  .form-success {
+    display: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #3dba6f;
+    background: rgba(61,186,111,0.08);
+    border: 1px solid rgba(61,186,111,0.25);
+    padding: 1rem 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  /* ===================== FOOTER ===================== */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--dark3);
+    padding: 3rem 0 2rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-logo img {
+    width: 40px; height: 40px;
+    object-fit: contain;
+    border-radius: 3px;
+  }
+
+  .footer-brand {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--orange);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-brand-sub {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.45rem;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--orange); }
+
+  .footer-copy {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--dark4);
+    letter-spacing: 0.12em;
+  }
+
+  /* ===================== ANIMATIONS ===================== */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes spinRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 30px rgba(232,50,10,0.4)); }
+    50% { transform: translateY(-10px); filter: drop-shadow(0 4px 40px rgba(232,50,10,0.6)); }
+  }
+
+  @keyframes scrollLine {
+    0% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+    100% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  }
+
+  @keyframes dash {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes flowAnim {
+    0% { stroke-dashoffset: 300; }
+    100% { stroke-dashoffset: 0; }
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width: 1024px) {
+    .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-right { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .industries-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .services-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .products-intro { grid-template-columns: 1fr; gap: 1rem; }
+    .accred-inner { flex-direction: column; align-items: flex-start; }
+    .accred-cards { justify-content: flex-start; flex-wrap: wrap; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .container { padding: 0 1.5rem; }
+    section { padding: 5rem 0; }
+    .hero-content { padding: 0 1.5rem; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    .industries-grid { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+    .accred-cards { flex-direction: column; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ===================== NAV ===================== -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img
+      src="https://i.imgur.com/placeholder.png"
+      alt="Hybrid Power Corp Logo"
+      class="nav-logo-img"
+      id="nav-logo-img"
+      onerror="this.style.display='none'; document.getElementById('nav-monogram').style.display='flex';"
+    />
+    <div class="nav-logo-text" id="nav-monogram" style="display:none; width:48px; height:48px; background:var(--orange); align-items:center; justify-content:center;">
+      <span style="font-family:'Orbitron',sans-serif; font-weight:900; font-size:1rem; color:#000;">HP</span>
+    </div>
+    <div class="nav-logo-text">
+      <span class="brand-name">HYBRID POWER</span>
+      <span class="brand-sub">CORP.</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+
+  <div class="nav-hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" style="display:none; position:fixed; top:72px; left:0; right:0; background:rgba(8,8,8,0.98); border-bottom:1px solid var(--dark3); z-index:999; padding:1.5rem;">
+  <ul style="list-style:none; display:flex; flex-direction:column; gap:1.5rem;">
+    <li><a href="#about" onclick="toggleMenu()" style="font-family:'Orbitron',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.15em; color:var(--chrome-light); text-decoration:none;">ABOUT</a></li>
+    <li><a href="#products" onclick="toggleMenu()" style="font-family:'Orbitron',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.15em; color:var(--chrome-light); text-decoration:none;">PRODUCTS</a></li>
+    <li><a href="#services" onclick="toggleMenu()" style="font-family:'Orbitron',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.15em; color:var(--chrome-light); text-decoration:none;">SERVICES</a></li>
+    <li><a href="#industries" onclick="toggleMenu()" style="font-family:'Orbitron',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.15em; color:var(--chrome-light); text-decoration:none;">INDUSTRIES</a></li>
+    <li><a href="#contact" onclick="toggleMenu()" style="font-family:'Orbitron',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.15em; color:var(--orange); text-decoration:none;">GET A QUOTE</a></li>
+  </ul>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span>PCAB / CDCP / ATD Accredited</span>
+      </div>
+
+      <div class="hero-title">
+        <div class="orange">HYBRID</div>
+        <div>POWER</div>
+        <div class="chrome">CORP.</div>
+      </div>
+
+      <p class="hero-tagline">
+        Design-Build Contractor specializing in <strong style="color:#fff;">Electro-Mechanical Turnkey Projects</strong> — from concept to commissioning.
+      </p>
+
+      <div class="hero-accreditations">
+        <span class="accred-badge">PCAB</span>
+        <span class="accred-badge">CDCP</span>
+        <span class="accred-badge">ATD</span>
+        <span class="accred-badge">UL LISTED</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request a Quote</a>
+        <a href="#services" class="btn-secondary">Our Services</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-logo-showcase">
+        <div class="hero-logo-ring"></div>
+        <div class="hero-logo-ring-2"></div>
+        <!-- Replace src with actual logo path -->
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camponotus_flavomarginatus_ant.jpg/320px-Camponotus_flavomarginatus_ant.jpg"
+          alt="Hybrid Power Corp."
+          class="hero-logo-img"
+          id="hero-logo-img"
+          onerror="this.parentElement.innerHTML = buildLogoFallback();"
+        />
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num" data-count="500">0</span>
+          <span class="hero-stat-label">Projects Done</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" data-count="4">0</span>
+          <span class="hero-stat-label">Industries</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" data-count="3">0</span>
+          <span class="hero-stat-label">Accreditations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span class="scroll-text">SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===================== TICKER ===================== -->
+<div class="ticker-strip" aria-hidden="true">
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item">HV SWITCHGEAR<div class="ticker-sep"></div></div>
+    <div class="ticker-item">MV SWITCHGEAR<div class="ticker-sep"></div></div>
+    <div class="ticker-item">LV SWITCHGEAR<div class="ticker-sep"></div></div>
+    <div class="ticker-item">CABLE TRAYS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">BUSWAY / BUSDUCT<div class="ticker-sep"></div></div>
+    <div class="ticker-item">DIESEL GENERATORS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">POWER TRANSFORMERS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">PANELBOARDS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">UPS SYSTEMS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">TURNKEY PROJECTS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">HV SWITCHGEAR<div class="ticker-sep"></div></div>
+    <div class="ticker-item">MV SWITCHGEAR<div class="ticker-sep"></div></div>
+    <div class="ticker-item">LV SWITCHGEAR<div class="ticker-sep"></div></div>
+    <div class="ticker-item">CABLE TRAYS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">BUSWAY / BUSDUCT<div class="ticker-sep"></div></div>
+    <div class="ticker-item">DIESEL GENERATORS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">POWER TRANSFORMERS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">PANELBOARDS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">UPS SYSTEMS<div class="ticker-sep"></div></div>
+    <div class="ticker-item">TURNKEY PROJECTS<div class="ticker-sep"></div></div>
+  </div>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">Powering <span class="accent">Critical</span><br/>Infrastructure</h2>
+        <p>
+          <strong>Hybrid Power Corp.</strong> is a Design-Build Contractor specializing in complete
+          Electro-Mechanical Turnkey Projects. We take full ownership — from engineering design to
+          procurement, installation, testing, and commissioning.
+        </p>
+        <p>
+          As a licensed supplier and contractor, we deliver <strong>HV, MV, and LV electrical systems</strong>
+          backed by UL listings and trusted international standards. Our team brings deep expertise
+          across manufacturing plants, industrial facilities, data centers, and commercial buildings.
+        </p>
+
+        <div class="about-highlights">
+          <div class="about-highlight">
+            <div class="ah-num">HV</div>
+            <div class="ah-label">High Voltage Systems</div>
+          </div>
+          <div class="about-highlight">
+            <div class="ah-num">MV</div>
+            <div class="ah-label">Medium Voltage Systems</div>
+          </div>
+          <div class="about-highlight">
+            <div class="ah-num">LV</div>
+            <div class="ah-label">Low Voltage Systems</div>
+          </div>
+          <div class="about-highlight">
+            <div class="ah-num">UL</div>
+            <div class="ah-label">UL-Listed Equipment</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-visual reveal reveal-delay-2">
+        <div class="schematic-wrapper">
+          <svg class="schematic-svg" viewBox="0 0 460 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Grid lines -->
+            <defs>
+              <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(232,50,10,0.06)" stroke-width="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="460" height="320" fill="url(#smallGrid)"/>
+
+            <!-- Utility Input -->
+            <rect x="30" y="130" width="70" height="60" rx="2" fill="rgba(232,50,10,0.08)" stroke="var(--orange)" stroke-width="1.5"/>
+            <text x="65" y="155" font-family="Share Tech Mono" font-size="8" fill="#E8320A" text-anchor="middle">UTILITY</text>
+            <text x="65" y="170" font-family="Share Tech Mono" font-size="8" fill="#E8320A" text-anchor="middle">INPUT</text>
+            <text x="65" y="185" font-family="Share Tech Mono" font-size="7" fill="rgba(232,50,10,0.5)" text-anchor="middle">HV</text>
+
+            <!-- HV Switchgear -->
+            <rect x="155" y="110" width="80" height="100" rx="2" fill="rgba(232,50,10,0.1)" stroke="var(--orange)" stroke-width="1.5"/>
+            <text x="195" y="148" font-family="Share Tech Mono" font-size="8" fill="#E8320A" text-anchor="middle">HV/MV</text>
+            <text x="195" y="162" font-family="Share Tech Mono" font-size="8" fill="#E8320A" text-anchor="middle">SWITCH</text>
+            <text x="195" y="176" font-family="Share Tech Mono" font-size="7" fill="rgba(232,50,10,0.5)" text-anchor="middle">GEAR</text>
+            <!-- Indicator -->
+            <circle cx="195" cy="195" r="4" fill="var(--orange)" opacity="0.7">
+              <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- Transformer -->
+            <rect x="295" y="100" width="80" height="120" rx="2" fill="rgba(232,50,10,0.08)" stroke="rgba(232,50,10,0.6)" stroke-width="1.5"/>
+            <text x="335" y="140" font-family="Share Tech Mono" font-size="8" fill="#aaa" text-anchor="middle">POWER</text>
+            <text x="335" y="154" font-family="Share Tech Mono" font-size="8" fill="#aaa" text-anchor="middle">TRANS</text>
+            <text x="335" y="168" font-family="Share Tech Mono" font-size="8" fill="#aaa" text-anchor="middle">FORMER</text>
+            <circle cx="335" cy="193" r="4" fill="rgba(232,50,10,0.6)">
+              <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- Generator -->
+            <rect x="155" y="260" width="80" height="50" rx="2" fill="rgba(200,200,200,0.06)" stroke="var(--chrome-dark)" stroke-width="1.5"/>
+            <text x="195" y="280" font-family="Share Tech Mono" font-size="8" fill="#888" text-anchor="middle">DIESEL</text>
+            <text x="195" y="296" font-family="Share Tech Mono" font-size="8" fill="#888" text-anchor="middle">GEN SET</text>
+
+            <!-- LV Distribution -->
+            <rect x="395" y="60" width="55" height="40" rx="2" fill="rgba(232,50,10,0.06)" stroke="rgba(232,50,10,0.4)" stroke-width="1"/>
+            <text x="422" y="79" font-family="Share Tech Mono" font-size="7" fill="#888" text-anchor="middle">LV DIST.</text>
+            <text x="422" y="92" font-family="Share Tech Mono" font-size="7" fill="#888" text-anchor="middle">PANEL</text>
+
+            <rect x="395" y="130" width="55" height="40" rx="2" fill="rgba(232,50,10,0.06)" stroke="rgba(232,50,10,0.4)" stroke-width="1"/>
+            <text x="422" y="149" font-family="Share Tech Mono" font-size="7" fill="#888" text-anchor="middle">UPS</text>
+            <text x="422" y="162" font-family="Share Tech Mono" font-size="7" fill="#888" text-anchor="middle">SYSTEM</text>
+
+            <rect x="395" y="200" width="55" height="40" rx="2" fill="rgba(232,50,10,0.06)" stroke="rgba(232,50,10,0.4)" stroke-width="1"/>
+            <text x="422" y="219" font-family="Share Tech Mono" font-size="7" fill="#888" text-anchor="middle">PANEL</text>
+            <text x="422" y="232" font-family="Share Tech Mono" font-size="7" fill="#888" text-anchor="middle">BOARD</text>
+
+            <!-- Flow Lines -->
+            <line x1="100" y1="160" x2="155" y2="160" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="4 2">
+              <animate attributeName="stroke-dashoffset" values="0;-12" dur="0.8s" repeatCount="indefinite"/>
+            </line>
+
+            <line x1="235" y1="160" x2="295" y2="160" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="4 2">
+              <animate attributeName="stroke-dashoffset" values="0;-12" dur="0.8s" repeatCount="indefinite"/>
+            </line>
+
+            <line x1="375" y1="140" x2="395" y2="80" stroke="rgba(232,50,10,0.5)" stroke-width="1" stroke-dasharray="3 2">
+              <animate attributeName="stroke-dashoffset" values="0;-10" dur="1s" repeatCount="indefinite"/>
+            </line>
+            <line x1="375" y1="160" x2="395" y2="150" stroke="rgba(232,50,10,0.5)" stroke-width="1" stroke-dasharray="3 2">
+              <animate attributeName="stroke-dashoffset" values="0;-10" dur="1s" begin="0.2s" repeatCount="indefinite"/>
+            </line>
+            <line x1="375" y1="180" x2="395" y2="220" stroke="rgba(232,50,10,0.5)" stroke-width="1" stroke-dasharray="3 2">
+              <animate attributeName="stroke-dashoffset" values="0;-10" dur="1s" begin="0.4s" repeatCount="indefinite"/>
+            </line>
+
+            <!-- Vertical busway -->
+            <line x1="195" y1="210" x2="195" y2="260" stroke="var(--chrome-dark)" stroke-width="1.5" stroke-dasharray="4 2">
+              <animate attributeName="stroke-dashoffset" values="0;12" dur="1.2s" repeatCount="indefinite"/>
+            </line>
+
+            <!-- Bus labels -->
+            <text x="127" y="148" font-family="Share Tech Mono" font-size="7" fill="rgba(232,50,10,0.5)">BUSWAY</text>
+            <text x="255" y="148" font-family="Share Tech Mono" font-size="7" fill="rgba(232,50,10,0.5)">BUSWAY</text>
+
+            <!-- Corner brackets decorative -->
+            <path d="M10 10 L10 30 M10 10 L30 10" stroke="rgba(232,50,10,0.3)" stroke-width="1.5"/>
+            <path d="M450 10 L450 30 M450 10 L430 10" stroke="rgba(232,50,10,0.3)" stroke-width="1.5"/>
+            <path d="M10 310 L10 290 M10 310 L30 310" stroke="rgba(232,50,10,0.3)" stroke-width="1.5"/>
+            <path d="M450 310 L450 290 M450 310 L430 310" stroke="rgba(232,50,10,0.3)" stroke-width="1.5"/>
+
+            <text x="10" y="15" font-family="Share Tech Mono" font-size="6" fill="rgba(232,50,10,0.4)">SYS.DIAGRAM // HPC-EL-001</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRODUCTS ===================== -->
+<section id="products">
+  <div class="container">
+    <div class="products-intro">
+      <div class="reveal">
+        <div class="section-label">Supply & Equipment</div>
+        <h2 class="section-title">What We <span class="accent">Supply</span></h2>
+      </div>
+      <p class="products-desc reveal reveal-delay-2">
+        We supply a comprehensive range of UL-listed electrical equipment sourced from globally certified manufacturers, ensuring reliability, compliance, and performance for every project.
+      </p>
+    </div>
+
+    <div class="products-grid">
+      <!-- HV/MV/LV Switchgear -->
+      <div class="product-card reveal">
+        <svg class="product-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="4" width="36" height="36" rx="2"/>
+          <rect x="10" y="10" width="10" height="24" rx="1"/>
+          <rect x="24" y="10" width="10" height="24" rx="1"/>
+          <circle cx="15" cy="16" r="2" fill="currentColor"/>
+          <circle cx="29" cy="16" r="2" fill="currentColor"/>
+          <line x1="13" y1="28" x2="17" y2="28"/>
+          <line x1="27" y1="28" x2="31" y2="28"/>
+        </svg>
+        <div class="product-name">HV / MV / LV SWITCHGEARS</div>
+        <div class="product-detail">High, Medium, and Low Voltage switchgear panels for complete power distribution control and protection systems.</div>
+        <span class="product-tag">UL LISTED</span>
+      </div>
+
+      <!-- Cable Trays -->
+      <div class="product-card reveal reveal-delay-1">
+        <svg class="product-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="16" width="36" height="14" rx="1"/>
+          <line x1="4" y1="23" x2="40" y2="23"/>
+          <line x1="12" y1="16" x2="12" y2="30"/>
+          <line x1="22" y1="16" x2="22" y2="30"/>
+          <line x1="32" y1="16" x2="32" y2="30"/>
+          <line x1="4" y1="8" x2="40" y2="8"/>
+          <line x1="8" y1="8" x2="8" y2="16"/>
+          <line x1="36" y1="8" x2="36" y2="16"/>
+        </svg>
+        <div class="product-name">UL-Listed Cable Trays</div>
+        <div class="product-detail">Ladder, perforated, and solid-bottom cable tray systems for organized, code-compliant cable management.</div>
+        <span class="product-tag">UL LISTED</span>
+      </div>
+
+      <!-- Busway -->
+      <div class="product-card reveal reveal-delay-2">
+        <svg class="product-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="10" width="36" height="8" rx="1"/>
+          <rect x="4" y="20" width="36" height="8" rx="1"/>
+          <rect x="4" y="30" width="36" height="8" rx="1"/>
+          <circle cx="10" cy="14" r="2" fill="currentColor"/>
+          <circle cx="10" cy="24" r="2" fill="currentColor"/>
+          <circle cx="10" cy="34" r="2" fill="currentColor"/>
+          <circle cx="34" cy="14" r="2" fill="currentColor"/>
+          <circle cx="34" cy="24" r="2" fill="currentColor"/>
+          <circle cx="34" cy="34" r="2" fill="currentColor"/>
+        </svg>
+        <div class="product-name">Busway / Busduct System</div>
+        <div class="product-detail">Pre-fabricated busbar trunking systems offering flexible, efficient power distribution in high-load environments.</div>
+        <span class="product-tag">UL LISTED</span>
+      </div>
+
+      <!-- Generator -->
+      <div class="product-card reveal reveal-delay-3">
+        <svg class="product-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="12" width="36" height="22" rx="2"/>
+          <circle cx="22" cy="23" r="6"/>
+          <circle cx="22" cy="23" r="2" fill="currentColor"/>
+          <rect x="8" y="16" width="5" height="4" rx="0.5"/>
+          <rect x="31" y="16" width="5" height="4" rx="0.5"/>
+          <line x1="12" y1="34" x2="12" y2="38"/>
+          <line x1="32" y1="34" x2="32" y2="38"/>
+          <line x1="8" y1="38" x2="36" y2="38"/>
+        </svg>
+        <div class="product-name">Diesel Generator Sets</div>
+        <div class="product-detail">Reliable standby and prime power diesel gensets for continuous and emergency power supply requirements.</div>
+        <span class="product-tag">PRIME POWER</span>
+      </div>
+
+      <!-- Transformer -->
+      <div class="product-card reveal">
+        <svg class="product-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="15" cy="22" r="9"/>
+          <circle cx="29" cy="22" r="9"/>
+          <line x1="6" y1="10" x2="6" y2="16"/>
+          <line x1="6" y1="28" x2="6" y2="34"/>
+          <line x1="38" y1="10" x2="38" y2="16"/>
+          <line x1="38" y1="28" x2="38" y2="34"/>
+        </svg>
+        <div class="product-name">Power Transformers</div>
+        <div class="product-detail">Dry-type and oil-immersed distribution and power transformers for voltage conversion and isolation applications.</div>
+        <span class="product-tag">HV / MV</span>
+      </div>
+
+      <!-- Panelboard -->
+      <div class="product-card reveal reveal-delay-1">
+        <svg class="product-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="8" y="4" width="28" height="36" rx="2"/>
+          <rect x="12" y="8" width="20" height="4" rx="0.5"/>
+          <line x1="12" y1="16" x2="32" y2="16"/>
+          <line x1="12" y1="20" x2="32" y2="20"/>
+          <line x1="12" y1="24" x2="32" y2="24"/>
+          <line x1="12" y1="28" x2="32" y2="28"/>
+          <line x1="12" y1="32" x2="32" y2="32"/>
+          <circle cx="29" cy="10" r="1.5" fill="currentColor"/>
+        </svg>
+        <div class="product-name">Panelboards</div>
+        <div class="product-detail">Main and sub distribution panelboards for branch circuit protection and power management in commercial and industrial settings.</div>
+        <span class="product-tag">LV DIST.</span>
+      </div>
+
+      <!-- UPS -->
+      <div class="product-card reveal reveal-delay-2">
+        <svg class="product-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="8" y="8" width="28" height="28" rx="2"/>
+          <path d="M19 22 L22 16 L25 22 L22 22 L22 28 L19 22Z" fill="currentColor" stroke="none"/>
+          <rect x="12" y="32" width="6" height="2"/>
+          <rect x="26" y="32" width="6" height="2"/>
+          <line x1="22" y1="4" x2="22" y2="8"/>
+          <line x1="22" y1="36" x2="22" y2="40"/>
+        </svg>
+        <div class="product-name">UPS Systems</div>
+        <div class="product-detail">Uninterruptible Power Supply systems for critical load protection, ensuring zero downtime for sensitive operations.</div>
+        <span class="product-tag">CRITICAL POWER</span>
+      </div>
+
+      <!-- Other Equipment -->
+      <div class="product-card reveal reveal-delay-3">
+        <svg class="product-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="22" cy="22" r="16"/>
+          <circle cx="22" cy="22" r="4"/>
+          <line x1="22" y1="6" x2="22" y2="14"/>
+          <line x1="22" y1="30" x2="22" y2="38"/>
+          <line x1="6" y1="22" x2="14" y2="22"/>
+          <line x1="30" y1="22" x2="38" y2="22"/>
+          <line x1="11" y1="11" x2="17" y2="17"/>
+          <line x1="27" y1="27" x2="33" y2="33"/>
+          <line x1="33" y1="11" x2="27" y2="17"/>
+          <line x1="17" y1="27" x2="11" y2="33"/>
+        </svg>
+        <div class="product-name">Various Electrical Equipment</div>
+        <div class="product-detail">Complete range of ancillary electrical equipment, protective devices, control systems, and accessories for turnkey projects.</div>
+        <span class="product-tag">FULL SUPPLY</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services">
+  <div class="container">
+    <div class="services-layout">
+      <div>
+        <div class="section-label reveal">Turnkey Delivery</div>
+        <h2 class="services-sidebar-title reveal">End-to-End <span style="color:var(--orange)">Project Execution</span></h2>
+        <p class="services-sidebar-text reveal">We handle every phase of your electro-mechanical project — from initial engineering to final handover. No gaps, no subcontractor confusion. One contract, full accountability.</p>
+      </div>
+
+      <div class="services-steps reveal reveal-delay-2">
+        <div class="service-step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <div class="step-title">Engineering Design</div>
+            <div class="step-desc">Single-line diagrams, load flow analysis, equipment schedules, and full electrical design documentation compliant with PEC and international standards.</div>
+          </div>
+        </div>
+        <div class="service-step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <div class="step-title">Procurement & Supply</div>
+            <div class="step-desc">Direct supply of UL-listed switchgears, cable trays, busduct systems, transformers, generators, panelboards, and all supporting equipment.</div>
+          </div>
+        </div>
+        <div class="service-step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <div class="step-title">Installation & Construction</div>
+            <div class="step-desc">PCAB-licensed construction team handles all civil, electro-mechanical installation works with strict adherence to safety and quality standards.</div>
+          </div>
+        </div>
+        <div class="service-step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <div class="step-title">Testing & Commissioning</div>
+            <div class="step-desc">Comprehensive factory acceptance testing, site acceptance testing, and full system commissioning with complete documentation and O&amp;M manuals.</div>
+          </div>
+        </div>
+        <div class="service-step">
+          <div class="step-num">05</div>
+          <div class="step-content">
+            <div class="step-title">Handover & After-Sales Support</div>
+            <div class="step-desc">Project handover with as-built drawings, warranty support, and ongoing maintenance services to keep your systems running at peak performance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INDUSTRIES ===================== -->
+<section id="industries" style="padding-bottom:0;">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:3rem;">
+      <div class="section-label">Project Industries</div>
+      <h2 class="section-title">Sectors We <span class="accent">Serve</span></h2>
+    </div>
+  </div>
+
+  <div class="industries-grid">
+    <div class="industry-card">
+      <div class="industry-bg ind-manufacturing">
+        <svg class="industry-art" viewBox="0 0 300 400" fill="none">
+          <rect x="20" y="80" width="260" height="240" stroke="#E8320A" stroke-width="1"/>
+          <rect x="40" y="100" width="80" height="120" stroke="#E8320A" stroke-width="0.5"/>
+          <rect x="140" y="100" width="80" height="120" stroke="#E8320A" stroke-width="0.5"/>
+          <rect x="60" y="240" width="180" height="60" stroke="#E8320A" stroke-width="0.5"/>
+          <line x1="20" y1="80" x2="20" y2="40" stroke="#E8320A" stroke-width="1"/>
+          <line x1="100" y1="80" x2="100" y2="40" stroke="#E8320A" stroke-width="1"/>
+          <circle cx="60" cy="180" r="20" stroke="#E8320A" stroke-width="0.5"/>
+          <circle cx="180" cy="180" r="20" stroke="#E8320A" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div class="industry-overlay"></div>
+      <div class="industry-content">
+        <div class="industry-num">01 / SECTOR</div>
+        <div class="industry-name">Manufacturing</div>
+        <div class="industry-desc">Complete electrical infrastructure for factories, production lines, and heavy manufacturing facilities.</div>
+      </div>
+    </div>
+
+    <div class="industry-card">
+      <div class="industry-bg ind-industrial">
+        <svg class="industry-art" viewBox="0 0 300 400" fill="none">
+          <circle cx="150" cy="200" r="120" stroke="#E8320A" stroke-width="0.5"/>
+          <circle cx="150" cy="200" r="80" stroke="#E8320A" stroke-width="0.5"/>
+          <circle cx="150" cy="200" r="40" stroke="#E8320A" stroke-width="0.5"/>
+          <line x1="150" y1="80" x2="150" y2="320" stroke="#E8320A" stroke-width="0.5"/>
+          <line x1="30" y1="200" x2="270" y2="200" stroke="#E8320A" stroke-width="0.5"/>
+          <line x1="65" y1="115" x2="235" y2="285" stroke="#E8320A" stroke-width="0.5"/>
+          <line x1="235" y1="115" x2="65" y2="285" stroke="#E8320A" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div class="industry-overlay"></div>
+      <div class="industry-content">
+        <div class="industry-num">02 / SECTOR</div>
+        <div class="industry-name">Industrial</div>
+        <div class="industry-desc">High-capacity power systems for petrochemical, mining, utilities, and heavy industrial applications.</div>
+      </div>
+    </div>
+
+    <div class="industry-card">
+      <div class="industry-bg ind-datacenter">
+        <svg class="industry-art" viewBox="0 0 300 400" fill="none">
+          <rect x="30" y="60" width="240" height="30" stroke="#E8320A" stroke-width="0.5"/>
+          <rect x="30" y="105" width="240" height="30" stroke="#E8320A" stroke-width="0.5"/>
+          <rect x="30" y="150" width="240" height="30" stroke="#E8320A" stroke-width="0.5"/>
+          <rect x="30" y="195" width="240" height="30" stroke="#E8320A" stroke-width="0.5"/>
+          <rect x="30" y="240" width="240" height="30" stroke="#E8320A" stroke-width="0.5"/>
+          <circle cx="250" cy="75" r="4" fill="#E8320A" opacity="0.5"/>
+          <circle cx="250" cy="120" r="4" fill="#E8320A" opacity="0.5"/>
+          <circle cx="250" cy="165" r="4" fill="#E8320A" opacity="0.5"/>
+          <circle cx="250" cy="210" r="4" fill="#E8320A" opacity="0.5"/>
+          <circle cx="250" cy="255" r="4" fill="#E8320A" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="industry-overlay"></div>
+      <div class="industry-content">
+        <div class="industry-num">03 / SECTOR</div>
+        <div class="industry-name">Data Centers</div>
+        <div class="industry-desc">Critical power infrastructure with redundancy, UPS integration, and precision cooling power systems.</div>
+      </div>
+    </div>
+
+    <div class="industry-card">
+      <div class="industry-bg ind-commercial">
+        <svg class="industry-art" viewBox="0 0 300 400" fill="none">
+          <rect x="80" y="100" width="140" height="220" stroke="#E8320A" stroke-width="0.5"/>
+          <rect x="80" y="100" width="140" height="4" fill="#E8320A" opacity="0.3"/>
+          <line x1="100" y1="120" x2="200" y2="120" stroke="#E8320A" stroke-width="0.3"/>
+          <line x1="100" y1="140" x2="200" y2="140" stroke="#E8320A" stroke-width="0.3"/>
+          <line x1="100" y1="160" x2="200" y2="160" stroke="#E8320A" stroke-width="0.3"/>
+          <line x1="100" y1="180" x2="200" y2="180" stroke="#E8320A" stroke-width="0.3"/>
+          <line x1="100" y1="200" x2="200" y2="200" stroke="#E8320A" stroke-width="0.3"/>
+          <line x1="100" y1="220" x2="200" y2="220" stroke="#E8320A" stroke-width="0.3"/>
+          <rect x="120" y="270" width="60" height="50" stroke="#E8320A" stroke-width="0.5"/>
+          <line x1="60" y1="320" x2="240" y2="320" stroke="#E8320A" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="industry-overlay"></div>
+      <div class="industry-content">
+        <div class="industry-num">04 / SECTOR</div>
+        <div class="industry-name">Commercial</div>
+        <div class="industry-desc">Full electro-mechanical solutions for office towers, malls, hotels, and mixed-use commercial developments.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ACCREDITATIONS ===================== -->
+<section id="accreditations">
+  <div class="container">
+    <div class="accred-inner">
+      <div class="accred-left">
+        <div class="accred-header-label">Certifications</div>
+        <div class="accred-header-title">Fully<br/>Accredited</div>
+      </div>
+      <div class="accred-cards">
+        <div class="accred-card">
+          <div class="accred-acronym">PCAB</div>
+          <div class="accred-fullname">Philippine Contractors Accreditation Board</div>
+        </div>
+        <div class="accred-card">
+          <div class="accred-acronym">CDCP</div>
+          <div class="accred-fullname">Certified Design-Build Contractor</div>
+        </div>
+        <div class="accred-card">
+          <div class="accred-acronym">ATD</div>
+          <div class="accred-fullname">Accredited Testing &amp; Design</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:3.5rem;">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Start Your <span class="accent">Project</span></h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-label" style="margin-top:0;">Direct Contact</div>
+        <div class="contact-info-title">Reach Our Team</div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M14 10.33l-3-1.5-1 1.5C8.33 9.83 6.17 7.67 5.17 6l1.5-1L5.17 2 2 2C2 9.73 6.27 14 14 14v-3.67z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Phone / Inquiry</div>
+            <div class="contact-item-value">+63 (contact us for number)</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="1" y="3" width="14" height="10" rx="1"/>
+              <polyline points="1,3 8,9 15,3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">info@hybridpowercorp.com</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="8" cy="7" r="3"/>
+              <path d="M8 1C5.24 1 3 3.24 3 6c0 4.5 5 9 5 9s5-4.5 5-9c0-2.76-2.24-5-5-5z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">Philippines</div>
+          </div>
+        </div>
+
+        <div class="contact-logo-area">
+          <!-- Replace src with your actual logo file -->
+          <div style="width:64px; height:64px; background:var(--orange); display:flex; align-items:center; justify-content:center; border-radius:4px; flex-shrink:0;">
+            <span style="font-family:'Orbitron',sans-serif; font-weight:900; font-size:1.2rem; color:#000;">HP</span>
+          </div>
+          <div>
+            <div style="font-family:'Orbitron',sans-serif; font-weight:800; font-size:1rem; color:var(--orange); letter-spacing:0.06em;">HYBRID POWER CORP.</div>
+            <div style="font-family:'Rajdhani',sans-serif; font-size:0.85rem; color:#666; margin-top:4px; line-height:1.4;">Design-Build Contractor<br/>Electro-Mechanical Turnkey Projects</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="section-label">Project Inquiry</div>
+        <div class="contact-info-title">Send a Message</div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">First Name</label>
+              <input class="form-input" type="text" id="fname" placeholder="Juan" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lname">Last Name</label>
+              <input class="form-input" type="text" id="lname" placeholder="dela Cruz" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input class="form-input" type="email" id="email" placeholder="you@company.com" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="company">Company Name</label>
+            <input class="form-input" type="text" id="company" placeholder="Your Company"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="industry">Industry</label>
+            <select class="form-select form-input" id="industry">
+              <option value="" disabled selected>Select your industry</option>
+              <option>Manufacturing</option>
+              <option>Industrial</option>
+              <option>Data Centers</option>
+              <option>Commercial</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Project Details</label>
+            <textarea class="form-textarea" id="message" placeholder="Describe your project requirements, scope, and timeline..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Inquiry</button>
+          <div class="form-success" id="formSuccess">
+            INQUIRY RECEIVED - WE WILL CONTACT YOU WITHIN 24 HOURS
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <div style="width:40px; height:40px; background:var(--orange); display:flex; align-items:center; justify-content:center; border-radius:3px; flex-shrink:0;">
+          <span style="font-family:'Orbitron',sans-serif; font-weight:900; font-size:0.9rem; color:#000;">HP</span>
+        </div>
+        <div>
+          <div class="footer-brand">HYBRID POWER CORP.</div>
+          <div class="footer-brand-sub">ELECTRO-MECHANICAL TURNKEY SOLUTIONS</div>
+        </div>
+      </div>
+
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="footer-copy">
+        &copy; 2026 HYBRID POWER CORP. ALL RIGHTS RESERVED.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+  // ---- CURSOR ----
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .product-card, .service-step, .industry-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px'; cursor.style.height = '20px';
+      cursorRing.style.width = '54px'; cursorRing.style.height = '54px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px'; cursor.style.height = '12px';
+      cursorRing.style.width = '36px'; cursorRing.style.height = '36px';
+    });
+  });
+
+  // ---- HERO CANVAS ----
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes = [];
+
+  function resizeCanvas() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function initNodes() {
+    nodes = [];
+    const cols = Math.floor(W / 60);
+    const rows = Math.floor(H / 60);
+    for (let i = 0; i <= cols; i++) {
+      for (let j = 0; j <= rows; j++) {
+        nodes.push({
+          x: i * 60 + (Math.random() - 0.5) * 20,
+          y: j * 60 + (Math.random() - 0.5) * 20,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: 0.02 + Math.random() * 0.02
+        });
+      }
+    }
+  }
+
+  function drawCanvas() {
+    ctx.clearRect(0, 0, W, H);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      n.pulse += n.pulseSpeed;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+    });
+
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 100) {
+          const alpha = (1 - dist/100) * 0.08;
+          ctx.strokeStyle = `rgba(232,50,10,${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n => {
+      const a = (Math.sin(n.pulse) * 0.5 + 0.5) * 0.6 + 0.1;
+      ctx.fillStyle = `rgba(232,50,10,${a})`;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(drawCanvas);
+  }
+
+  resizeCanvas();
+  initNodes();
+  drawCanvas();
+  window.addEventListener('resize', () => { resizeCanvas(); initNodes(); });
+
+  // ---- LOGO SWAP (use your actual logos) ----
+  // To use uploaded logos:
+  // document.getElementById('nav-logo-img').src = 'PATH_TO_YOUR_NAV_LOGO.png';
+  // document.getElementById('hero-logo-img').src = 'PATH_TO_YOUR_MAIN_LOGO.png';
+  // The logos display as orange "HP" monogram fallbacks until real paths are set.
+  const heroLogoImg = document.getElementById('hero-logo-img');
+  if (heroLogoImg) {
+    heroLogoImg.onerror = function() {
+      const wrapper = this.parentElement;
+      this.remove();
+      const fb = document.createElement('div');
+      fb.style.cssText = 'width:200px;height:200px;background:var(--orange);display:flex;align-items:center;justify-content:center;border-radius:12px;position:relative;z-index:2;box-shadow:0 0 60px rgba(232,50,10,0.5);';
+      fb.innerHTML = '<div style="text-align:center;"><div style="font-family:Orbitron,sans-serif;font-weight:900;font-size:2.5rem;color:#000;line-height:1;">HP</div><div style="font-family:Orbitron,sans-serif;font-size:0.5rem;font-weight:700;color:rgba(0,0,0,0.6);letter-spacing:0.2em;margin-top:8px;">POWER CORP.</div></div>';
+      wrapper.appendChild(fb);
+    };
+    heroLogoImg.src = '';
+    heroLogoImg.onerror();
+  }
+  const navLogoImg = document.getElementById('nav-logo-img');
+  if (navLogoImg) {
+    navLogoImg.onerror = function() {
+      this.style.display = 'none';
+      const mono = document.getElementById('nav-monogram');
+      if (mono) mono.style.display = 'flex';
+    };
+    navLogoImg.src = '';
+    navLogoImg.onerror();
+  }
+
+  // ---- COUNTER ANIMATION ----
+  function animateCounter(el, target, duration) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const interval = setInterval(() => {
+      start += step;
+      if (start >= target) { el.textContent = target + '+'; clearInterval(interval); return; }
+      el.textContent = Math.floor(start);
+    }, 16);
+  }
+
+  let countersStarted = false;
+  function startCounters() {
+    if (countersStarted) return;
+    countersStarted = true;
+    document.querySelectorAll('[data-count]').forEach(el => {
+      animateCounter(el, parseInt(el.dataset.count), 2000);
+    });
+  }
+
+  // ---- SCROLL REVEAL ----
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.closest('#hero')) startCounters();
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  const heroSection = document.getElementById('hero');
+  const heroObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) startCounters();
+  }, { threshold: 0.3 });
+  heroObserver.observe(heroSection);
+
+  // Start counters on load too
+  setTimeout(startCounters, 1200);
+
+  // ---- FORM SUBMIT ----
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'SENDING...';
+    btn.style.background = '#555';
+    setTimeout(() => {
+      btn.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }, 1500);
+  });
+
+  // ---- MOBILE MENU ----
+  function toggleMenu() {
+    const m = document.getElementById('mobile-menu');
+    m.style.display = m.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>
